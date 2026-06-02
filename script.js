@@ -108,3 +108,174 @@ window.addEventListener('scroll', () => {
     heroBg.style.transform = `translateY(${offset}px)`;
   }
 }, { passive: true });
+
+
+/* ===== DARK MODE & LIGHT MODE ===== */
+const themeToggle = document.getElementById('theme-toggle');
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-theme');
+    const isDark = document.body.classList.contains('dark-theme');
+    themeToggle.textContent = isDark ? '☀️' : '🌙';
+    themeToggle.title = isDark ? 'Toggle Light Theme' : 'Toggle Dark Theme';
+  });
+}
+
+/* ===== LANGUAGE TRANSLATION SYSTEM ===== */
+const translations = {
+  ml: {
+    "nav-title": "കീഴില്ലം നസ്രേത്ത് മാർത്തോമ്മ ചർച്ച്",
+    "nav-home": "ആമുഖം",
+    "nav-about": "ഞങ്ങളെ കുറിച്ച്",
+    "nav-verse": "വചനം",
+    "nav-leaders": "നേതൃത്വം",
+    "nav-gallery": "ദൃശ്യങ്ങൾ",
+    "nav-contact": "ബന്ധപ്പെടുക",
+    "hero-sub": "മലങ്കര മാർത്തോമ്മ സുറിയാനി സഭ",
+    "hero-title": "കീഴില്ലം നസ്രേത്ത്<br/>മാർത്തോമ്മ ചർച്ച്",
+    "hero-tagline": "ആരാധന &bull; ഐക്യം &bull; സേവനം",
+    "hero-worship": "ഞായറാഴ്ച വി. കുർബാന — രാവിലെ 8:30",
+    "hero-btn": "കൂടുതൽ അറിയുക",
+    "verse-1-text": '"ഇതാ, സഹോദരന്മാർ ഒന്നിച്ചു വസിക്കുന്നത് എത്ര നല്ലതും മനോഹരവും!"',
+    "verse-1-ref": "— സങ്കീർത്തനം 133:1",
+    "about-label": "ഞങ്ങളെ കുറിച്ച്",
+    "about-title": "ദൈവ സ്നേഹത്തിൽ<br/>ഒന്നുചേർന്ന ഇടവക",
+    "about-p1": "കീഴില്ലം നസ്രേത്ത് മാർത്തോമ്മ ഇടവക, മലങ്കര മാർത്തോമ്മ സുറിയാനി സഭയുടെ കോട്ടയം-കൊച്ചി ഭദ്രാസനത്തിൽ ഉൾപ്പെടുന്ന ഒരു ജീവൽ ദൈവ സമൂഹമാണ്. ഇടവകാംഗങ്ങൾ ആരാധനയിലും, ഐക്യത്തിലും, ദൈവ സേവനത്തിലും ഒന്നിച്ചു ജീവിക്കുന്നു.",
+    "about-p2": "ഞായറാഴ്ച ആരാധന, സൺഡേ സ്കൂൾ, യുവജനസഖ്യം, സേവികാ സംഘം എന്നിവ ഇടവകയുടെ ഊർജ്ജ സ്രോതസ്സുകൾ ആണ്.",
+    "stat-worship": "ഞായറാഴ്ച<br/>ആരാധന",
+    "stat-youth": "യുവജന<br/>സഖ്യം",
+    "stat-sevika": "സേവികാ<br/>സംഘം",
+    "verse-2-text": '"നാം അന്യോന്യം സ്നേഹിക്കാം — കൂടിവരുന്നത് ഉപേക്ഷിക്കാതെ, ആ ദിവസം അടുക്കുന്തോറും ഒന്നിച്ചു പ്രോത്സാഹിപ്പിച്ചുകൊണ്ടിരിക്കാം."',
+    "verse-2-ref": "— എബ്രായർ 10:24-25",
+    "leaders-label": "നേതൃത്വം",
+    "leaders-title": "ഞങ്ങളുടെ ഭാരവാഹികൾ",
+    "leaders-intro": "ദൈവ സ്നേഹത്തോടെ ഇടവകയെ നയിക്കുന്ന നേതൃനിര",
+    "vicar-name": "റവ. അലക്സാണ്ടർ ജോർജ്",
+    "vicar-role": "ഇടവക വികാരി",
+    "vicar-desc": "കീഴില്ലം നസ്രേത്ത് ഇടവകയുടെ ഇപ്പോഴത്തെ ഇടവക വികാരി. ആരാധന, ദൈവ വചന ശുശ്രൂഷ, ഇടവക ഐക്യം എന്നിവ ഒരുക്കുന്ന ഇടവകയുടെ ആത്മീയ നേതൃത്വം.",
+    "group-committee": "കമ്മിറ്റി അംഗങ്ങൾ",
+    "group-youth": "യുവജനസഖ്യം",
+    "group-sevika": "സേവികാ സംഘം",
+    "role-secretary": "സെക്രട്ടറി",
+    "role-trustee": "ട്രസ്റ്റി",
+    "role-rep": "ഇടവക പ്രതിനിധി",
+    "role-senior": "സീനിയർ സിറ്റിസൺ ഫോറം",
+    "role-ss": "സൺഡേ സ്കൂൾ സെക്രട്ടറി",
+    "role-sevika-sec": "സേവികാ സംഘം സെക്രട്ടറി",
+    "role-vp": "വൈസ് പ്രസിഡന്റ്",
+    "role-js": "ജോയിൻ്റ് സെക്രട്ടറി",
+    "role-treasurer": "ട്രഷറർ",
+    "role-auditor": "കണക്ക് പരിശോധകൻ",
+    "role-dio": "ഭദ്രാസന പ്രതിനിധി",
+    "role-assembly": "കൈസ്ഥാന സമിതി പ്രതിനിധി",
+    "role-member": "അംഗം",
+    "gallery-label": "ദൃശ്യങ്ങൾ",
+    "gallery-title": "ഞങ്ങളുടെ ഇടവക",
+    "cap-gate": "ഗേറ്റ് ദൃശ്യം",
+    "cap-front": "ദേവാലയ മുൻഭാഗം",
+    "cap-church": "ചർച്ച്",
+    "cap-dist": "ദൂര ദൃശ്യം",
+    "cap-night": "രാത്രി ദൃശ്യം",
+    "verse-3-text": '"ഇവ എല്ലാറ്റിന്റെയും മുകളിൽ സ്നേഹം ധരിക്കുവിൻ; അത് ഐക്യത്തിന്റെ തികഞ്ഞ ബന്ധമാകുന്നു."',
+    "verse-3-ref": "— കൊലൊസ്സ്യർ 3:14",
+    "contact-label": "ബന്ധപ്പെടുക",
+    "contact-title": "ഞങ്ങളിലേക്ക്<br/>എത്തിച്ചേരൂ",
+    "card-church-title": "ദേവാലയം",
+    "card-church-body": "കീഴില്ലം നസ്രേത്ത്<br/>മാർത്തോമ്മ ചർച്ച്<br/>കീഴില്ലം, കേരളം",
+    "card-worship-title": "ആരാധനാ സമയം",
+    "card-worship-body": "ഞായറാഴ്ച<br/>രാവിലെ 8:30<br/>വിശുദ്ധ കുർബാന",
+    "card-vicar-title": "വികാരി",
+    "card-vicar-body": "റവ. അലക്സാണ്ടർ<br/>ജോർജ് അച്ചൻ<br/>കീഴില്ലം നസ്രേത്ത്",
+    "footer-church-name": "കീഴില്ലം നസ്രേത്ത് മാർത്തോമ്മ ചർച്ച്",
+    "footer-denomination": "മലങ്കര മാർത്തോമ്മ സുറിയാനി സഭ",
+    "footer-verse": '"ദൈവം സ്നേഹം ആകുന്നു" — 1 യോഹ. 4:8',
+    "footer-copy": "© 2026 കീഴില്ലം നസ്രേത്ത് മാർത്തോമ്മ ചർച്ച്. എല്ലാ അവകാശങ്ങളും നിക്ഷിപ്തം."
+  },
+  en: {
+    "nav-title": "Keezhillam Nazareth Mar Thoma Church",
+    "nav-home": "Home",
+    "nav-about": "About Us",
+    "nav-verse": "Verse",
+    "nav-leaders": "Leaders",
+    "nav-gallery": "Gallery",
+    "nav-contact": "Contact",
+    "hero-sub": "Malankara Mar Thoma Syrian Church",
+    "hero-title": "Keezhillam Nazareth<br/>Mar Thoma Church",
+    "hero-tagline": "Worship &bull; Unity &bull; Service",
+    "hero-worship": "Sunday Holy Communion — 8:30 AM",
+    "hero-btn": "Learn More",
+    "verse-1-text": '"Behold, how good and pleasant it is when brothers dwell in unity!"',
+    "verse-1-ref": "— Psalm 133:1",
+    "about-label": "About Us",
+    "about-title": "A Parish United<br/>in God\'s Love",
+    "about-p1": "Keezhillam Nazareth Mar Thoma Parish is a vibrant, living faith community under the Kottayam-Kochi Diocese of the Malankara Mar Thoma Syrian Church. Our members live together in active worship, fellowship, and service.",
+    "about-p2": "Sunday Worship, Sunday School, Youth Union, and Sevika Sangham are the pillars and sources of strength of our parish.",
+    "stat-worship": "Sunday<br/>Worship",
+    "stat-youth": "Youth<br/>Fellowship",
+    "stat-sevika": "Sevika<br/>Sangham",
+    "verse-2-text": '"Let us consider how to stir up one another to love and good works, not neglecting to meet together, but encouraging one another."',
+    "verse-2-ref": "— Hebrews 10:24-25",
+    "leaders-label": "Leaders",
+    "leaders-title": "Our Leaders & Committee",
+    "leaders-intro": "Leading our parish with God\'s love and wisdom",
+    "vicar-name": "Rev. Alexander George",
+    "vicar-role": "Parish Vicar",
+    "vicar-desc": "The current Vicar of Keezhillam Nazareth Parish, providing spiritual leadership in worship, word, and building unity within the community.",
+    "group-committee": "Committee Members",
+    "group-youth": "Youth Fellowship",
+    "group-sevika": "Sevika Sangham",
+    "role-secretary": "Secretary",
+    "role-trustee": "Trustee",
+    "role-rep": "Parish Representative",
+    "role-senior": "Senior Citizen Forum",
+    "role-ss": "Sunday School Secretary",
+    "role-sevika-sec": "Sevika Sangham Secretary",
+    "role-vp": "Vice President",
+    "role-js": "Joint Secretary",
+    "role-treasurer": "Treasurer",
+    "role-auditor": "Auditor",
+    "role-dio": "Diocesan Representative",
+    "role-assembly": "Assembly Representative",
+    "role-member": "Member",
+    "gallery-label": "Gallery",
+    "gallery-title": "Our Parish Gallery",
+    "cap-gate": "Gate View",
+    "cap-front": "Church Front View",
+    "cap-church": "Church",
+    "cap-dist": "Long Distance View",
+    "cap-night": "Night View",
+    "verse-3-text": '"And above all these put on love, which binds everything together in perfect harmony."',
+    "verse-3-ref": "— Colossians 3:14",
+    "contact-label": "Contact Us",
+    "contact-title": "Reach Out<br/>to Us",
+    "card-church-title": "Church Office",
+    "card-church-body": "Keezhillam Nazareth<br/>Mar Thoma Church<br/>Keezhillam, Kerala",
+    "card-worship-title": "Worship Timings",
+    "card-worship-body": "Sunday<br/>8:30 AM<br/>Holy Communion",
+    "card-vicar-title": "Parish Priest",
+    "card-vicar-body": "Rev. Alexander<br/>George (Vicar)<br/>Keezhillam Nazareth",
+    "footer-church-name": "Keezhillam Nazareth Mar Thoma Church",
+    "footer-denomination": "Malankara Mar Thoma Syrian Church",
+    "footer-verse": '"God is love" — 1 John 4:8',
+    "footer-copy": "© 2026 Keezhillam Nazareth Mar Thoma Church. All Rights Reserved."
+  }
+};
+
+const langToggle = document.getElementById('lang-toggle');
+if (langToggle) {
+  let currentLang = 'ml'; // Default is Malayalam
+  langToggle.addEventListener('click', () => {
+    currentLang = currentLang === 'ml' ? 'en' : 'ml';
+    langToggle.textContent = currentLang === 'ml' ? 'EN' : 'ML';
+    langToggle.title = currentLang === 'ml' ? 'Switch to English' : 'Switch to Malayalam';
+    
+    // Switch all translatable contents
+    document.querySelectorAll('[data-key]').forEach(el => {
+      const key = el.getAttribute('data-key');
+      if (translations[currentLang] && translations[currentLang][key]) {
+        el.innerHTML = translations[currentLang][key];
+      }
+    });
+  });
+}
+

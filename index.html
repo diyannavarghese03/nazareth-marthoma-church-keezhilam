@@ -17,16 +17,20 @@
     <div class="nav-inner">
       <div class="nav-logo">
         <img src="Logo.png" alt="Church Logo" id="nav-logo-img" />
-        <span class="nav-title">കീഴില്ലം നസ്രേത്ത് മാർത്തോമ്മ ചർച്ച്</span>
+        <span class="nav-title" data-key="nav-title">കീഴില്ലം നസ്രേത്ത് മാർത്തോമ്മ ചർച്ച്</span>
       </div>
       <ul class="nav-links" id="nav-links">
-        <li><a href="#home">ആമുഖം</a></li>
-        <li><a href="#about">ഞങ്ങളെ കുറിച്ച്</a></li>
-        <li><a href="#verse">വചനം</a></li>
-        <li><a href="#leaders">നേതൃത്വം</a></li>
-        <li><a href="#gallery">ദൃശ്യങ്ങൾ</a></li>
-        <li><a href="#contact">ബന്ധപ്പെടുക</a></li>
+        <li><a href="#home" data-key="nav-home">ആമുഖം</a></li>
+        <li><a href="#about" data-key="nav-about">ഞങ്ങളെ കുറിച്ച്</a></li>
+        <li><a href="#verse" data-key="nav-verse">വചനം</a></li>
+        <li><a href="#leaders" data-key="nav-leaders">നേതൃത്വം</a></li>
+        <li><a href="#gallery" data-key="nav-gallery">ദൃശ്യങ്ങൾ</a></li>
+        <li><a href="#contact" data-key="nav-contact">ബന്ധപ്പെടുക</a></li>
       </ul>
+      <div class="nav-controls">
+        <button id="theme-toggle" class="control-btn" aria-label="Toggle Theme" title="Toggle Light/Dark Theme">🌙</button>
+        <button id="lang-toggle" class="control-btn" aria-label="Toggle Language" title="Toggle Malayalam/English">EN</button>
+      </div>
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
@@ -47,14 +51,14 @@
       <div class="hero-logo-wrap">
         <img src="Logo.png" alt="Nazareth Mar Thoma Church Logo" class="hero-logo" />
       </div>
-      <p class="hero-subtitle">മലങ്കര മാർത്തോമ്മ സുറിയാനി സഭ</p>
-      <h1 class="hero-title">കീഴില്ലം നസ്രേത്ത്<br/>മാർത്തോമ്മ ചർച്ച്</h1>
-      <p class="hero-tagline">ആരാധന &bull; ഐക്യം &bull; സേവനം</p>
+      <p class="hero-subtitle" data-key="hero-sub">മലങ്കര മാർത്തോമ്മ സുറിയാനി സഭ</p>
+      <h1 class="hero-title" data-key="hero-title">കീഴില്ലം നസ്രേത്ത്<br/>മാർത്തോമ്മ ചർച്ച്</h1>
+      <p class="hero-tagline" data-key="hero-tagline">ആരാധന &bull; ഐക്യം &bull; സേവനം</p>
       <div class="hero-worship-time">
         <span class="worship-icon">✝</span>
-        <span>ഞായറാഴ്ച വി. കുർബാന — രാവിലെ 8:30</span>
+        <span data-key="hero-worship">ഞായറാഴ്ച വി. കുർബാന — രാവിലെ 8:30</span>
       </div>
-      <a href="#about" class="hero-btn">കൂടുതൽ അറിയുക</a>
+      <a href="#about" class="hero-btn" data-key="hero-btn">കൂടുതൽ അറിയുക</a>
     </div>
     <div class="hero-scroll-hint">
       <div class="scroll-arrow"></div>
@@ -65,10 +69,10 @@
   <section id="verse" class="verse-section">
     <div class="verse-inner">
       <div class="verse-cross">✝</div>
-      <blockquote class="verse-text">
+      <blockquote class="verse-text" data-key="verse-1-text">
         "ഇതാ, സഹോദരന്മാർ ഒന്നിച്ചു വസിക്കുന്നത് എത്ര നല്ലതും മനോഹരവും!"
       </blockquote>
-      <cite class="verse-ref">— സങ്കീർത്തനം 133:1</cite>
+      <cite class="verse-ref" data-key="verse-1-ref">— സങ്കീർത്തനം 133:1</cite>
     </div>
   </section>
 
@@ -81,28 +85,28 @@
       </div>
     </div>
     <div class="about-text-col">
-      <span class="section-label">ഞങ്ങളെ കുറിച്ച്</span>
-      <h2 class="section-title">ദൈവ സ്നേഹത്തിൽ<br/>ഒന്നുചേർന്ന ഇടവക</h2>
-      <p class="about-para">
+      <span class="section-label" data-key="about-label">ഞങ്ങളെ കുറിച്ച്</span>
+      <h2 class="section-title" data-key="about-title">ദൈവ സ്നേഹത്തിൽ<br/>ഒന്നുചേർന്ന ഇടവക</h2>
+      <p class="about-para" data-key="about-p1">
         കീഴില്ലം നസ്രേത്ത് മാർത്തോമ്മ ഇടവക, മലങ്കര മാർത്തോമ്മ സുറിയാനി സഭയുടെ കോട്ടയം-കൊച്ചി ഭദ്രാസനത്തിൽ ഉൾപ്പെടുന്ന ഒരു ജീവൽ ദൈവ സമൂഹമാണ്. ഇടവകാംഗങ്ങൾ ആരാധനയിലും, ഐക്യത്തിലും, ദൈവ സേവനത്തിലും ഒന്നിച്ചു ജീവിക്കുന്നു.
       </p>
-      <p class="about-para">
+      <p class="about-para" data-key="about-p2">
         ഞായറാഴ്ച ആരാധന, സൺഡേ സ്കൂൾ, യുവജനസഖ്യം, സേവികാ സംഘം എന്നിവ ഇടവകയുടെ ഊർജ്ജ സ്രോതസ്സുകൾ ആണ്.
       </p>
       <div class="about-stats">
         <div class="stat-item">
           <span class="stat-num">☩</span>
-          <span class="stat-label">ഞായറാഴ്ച<br/>ആരാധന</span>
+          <span class="stat-label" data-key="stat-worship">ഞായറാഴ്ച<br/>ആരാധന</span>
         </div>
         <div class="stat-divider"></div>
         <div class="stat-item">
           <span class="stat-num">✦</span>
-          <span class="stat-label">യുവജന<br/>സഖ്യം</span>
+          <span class="stat-label" data-key="stat-youth">യുവജന<br/>സഖ്യം</span>
         </div>
         <div class="stat-divider"></div>
         <div class="stat-item">
           <span class="stat-num">♡</span>
-          <span class="stat-label">സേവികാ<br/>സംഘം</span>
+          <span class="stat-label" data-key="stat-sevika">സേവികാ<br/>സംഘം</span>
         </div>
       </div>
     </div>
@@ -116,28 +120,28 @@
     </div>
     <div class="banner-verse-content">
       <div class="banner-verse-deco">✝</div>
-      <blockquote class="banner-verse-text">
+      <blockquote class="banner-verse-text" data-key="verse-2-text">
         "നാം അന്യോന്യം സ്നേഹിക്കാം — കൂടിവരുന്നത് ഉപേക്ഷിക്കാതെ, ആ ദിവസം അടുക്കുന്തോറും ഒന്നിച്ചു പ്രോത്സാഹിപ്പിച്ചുകൊണ്ടിരിക്കാം."
       </blockquote>
-      <cite class="banner-verse-ref">— എബ്രായർ 10:24-25</cite>
+      <cite class="banner-verse-ref" data-key="verse-2-ref">— എബ്രായർ 10:24-25</cite>
     </div>
   </section>
 
   <!-- ===== LEADERS ===== -->
   <section id="leaders" class="leaders-section">
     <div class="leaders-header">
-      <span class="section-label">നേതൃത്വം</span>
-      <h2 class="section-title">ഞങ്ങളുടെ ഭാരവാഹികൾ</h2>
-      <p class="leaders-intro">ദൈവ സ്നേഹത്തോടെ ഇടവകയെ നയിക്കുന്ന നേതൃനിര</p>
+      <span class="section-label" data-key="leaders-label">നേതൃത്വം</span>
+      <h2 class="section-title" data-key="leaders-title">ഞങ്ങളുടെ ഭാരവാഹികൾ</h2>
+      <p class="leaders-intro" data-key="leaders-intro">ദൈവ സ്നേഹത്തോടെ ഇടവകയെ നയിക്കുന്ന നേതൃനിര</p>
     </div>
 
     <!-- Vicar -->
     <div class="vicar-wrap">
       <div class="vicar-card">
         <div class="vicar-icon">✝</div>
-        <h3 class="vicar-name">റവ. അലക്സാണ്ടർ ജോർജ്</h3>
-        <p class="vicar-role">ഇടവക വികാരി</p>
-        <p class="vicar-desc">കീഴില്ലം നസ്രേത്ത് ഇടവകയുടെ ഇപ്പോഴത്തെ ഇടവക വികാരി. ആരാധന, ദൈവ വചന ശുശ്രൂഷ, ഇടവക ഐക്യം എന്നിവ ഒരുക്കുന്ന ഇടവകയുടെ ആത്മീയ നേതൃത്വം.</p>
+        <h3 class="vicar-name" data-key="vicar-name">റവ. അലക്സാണ്ടർ ജോർജ്</h3>
+        <p class="vicar-role" data-key="vicar-role">ഇടവക വികാരി</p>
+        <p class="vicar-desc" data-key="vicar-desc">കീഴില്ലം നസ്രേത്ത് ഇടവകയുടെ ഇപ്പോഴത്തെ ഇടവക വികാരി. ആരാധന, ദൈവ വചന ശുശ്രൂഷ, ഇടവക ഐക്യം എന്നിവ ഒരുക്കുന്ന ഇടവകയുടെ ആത്മീയ നേതൃത്വം.</p>
       </div>
     </div>
 
@@ -145,50 +149,50 @@
     <div class="leader-group">
       <h3 class="leader-group-title">
         <span class="group-icon">⚙</span>
-        കമ്മിറ്റി അംഗങ്ങൾ
+        <span data-key="group-committee">കമ്മിറ്റി അംഗങ്ങൾ</span>
         <span class="group-icon">⚙</span>
       </h3>
       <div class="leaders-grid" id="committee-grid">
         <div class="leader-card">
           <div class="leader-avatar">JC</div>
           <div class="leader-info">
-            <h4>ജോസ് കെ. ചാക്കോ</h4>
-            <span class="leader-role">സെക്രട്ടറി</span>
+            <h4 data-key="leader-jose">ജോസ് കെ. ചാക്കോ</h4>
+            <span class="leader-role" data-key="role-secretary">സെക്രട്ടറി</span>
           </div>
         </div>
         <div class="leader-card">
           <div class="leader-avatar">PK</div>
           <div class="leader-info">
-            <h4>പോൾ കെ. ചെറിയാൻ</h4>
-            <span class="leader-role">ട്രസ്റ്റി</span>
+            <h4 data-key="leader-paul">പോൾ കെ. ചെറിയാൻ</h4>
+            <span class="leader-role" data-key="role-trustee">ട്രസ്റ്റി</span>
           </div>
         </div>
         <div class="leader-card">
           <div class="leader-avatar">TP</div>
           <div class="leader-info">
-            <h4>തോമസ് കെ. പോൾ</h4>
-            <span class="leader-role">ഇടവക പ്രതിനിധി</span>
+            <h4 data-key="leader-thomas">തോമസ് കെ. പോൾ</h4>
+            <span class="leader-role" data-key="role-rep">ഇടവക പ്രതിനിധി</span>
           </div>
         </div>
         <div class="leader-card">
           <div class="leader-avatar">YD</div>
           <div class="leader-info">
-            <h4>വൈ. ഡി. കുഞ്ഞുമോൻ</h4>
-            <span class="leader-role">സീനിയർ സിറ്റിസൺ ഫോറം</span>
+            <h4 data-key="leader-kunjumon">വൈ. ഡി. കുഞ്ഞുമോൻ</h4>
+            <span class="leader-role" data-key="role-senior">സീനിയർ സിറ്റിസൺ ഫോറം</span>
           </div>
         </div>
         <div class="leader-card">
           <div class="leader-avatar">SK</div>
           <div class="leader-info">
-            <h4>ഷിബു കെ. വർഗ്ഗീസ്</h4>
-            <span class="leader-role">സൺഡേ സ്കൂൾ സെക്രട്ടറി</span>
+            <h4 data-key="leader-shibu">ഷിബു കെ. വർഗ്ഗീസ്</h4>
+            <span class="leader-role" data-key="role-ss">സൺഡേ സ്കൂൾ സെക്രട്ടറി</span>
           </div>
         </div>
         <div class="leader-card">
           <div class="leader-avatar">GT</div>
           <div class="leader-info">
-            <h4>ഗീത തര്യൻ</h4>
-            <span class="leader-role">സേവികാ സംഘം സെക്രട്ടറി</span>
+            <h4 data-key="leader-geetha">ഗീത തര്യൻ</h4>
+            <span class="leader-role" data-key="role-sevika-sec">സേവികാ സംഘം സെക്രട്ടറി</span>
           </div>
         </div>
       </div>
@@ -198,7 +202,7 @@
     <div class="leader-group leader-group-youth">
       <h3 class="leader-group-title">
         <span class="group-icon">✦</span>
-        യുവജനസഖ്യം
+        <span data-key="group-youth">യുവജനസഖ്യം</span>
         <span class="group-icon">✦</span>
       </h3>
       <div class="leaders-grid">
@@ -206,63 +210,63 @@
           <div class="leader-avatar youth-avatar">JS</div>
           <div class="leader-info">
             <h4>Jojo S. Varghese</h4>
-            <span class="leader-role">വൈസ് പ്രസിഡന്റ്</span>
+            <span class="leader-role" data-key="role-vp">വൈസ് പ്രസിഡന്റ്</span>
           </div>
         </div>
         <div class="leader-card youth-card">
           <div class="leader-avatar youth-avatar">KP</div>
           <div class="leader-info">
             <h4>Kevin Paul Thampy</h4>
-            <span class="leader-role">സെക്രട്ടറി</span>
+            <span class="leader-role" data-key="role-secretary">സെക്രട്ടറി</span>
           </div>
         </div>
         <div class="leader-card youth-card">
           <div class="leader-avatar youth-avatar">PM</div>
           <div class="leader-info">
             <h4>Pavana Mariam Thomas</h4>
-            <span class="leader-role">ജോയിൻ്റ് സെക്രട്ടറി</span>
+            <span class="leader-role" data-key="role-js">ജോയിൻ്റ് സെക്രട്ടറി</span>
           </div>
         </div>
         <div class="leader-card youth-card">
           <div class="leader-avatar youth-avatar">VP</div>
           <div class="leader-info">
             <h4>Varun P. Varghese</h4>
-            <span class="leader-role">ട്രഷറർ</span>
+            <span class="leader-role" data-key="role-treasurer">ട്രഷറർ</span>
           </div>
         </div>
         <div class="leader-card youth-card">
           <div class="leader-avatar youth-avatar">AM</div>
           <div class="leader-info">
             <h4>Alina Maria</h4>
-            <span class="leader-role">കണക്ക് പരിശോധകൻ</span>
+            <span class="leader-role" data-key="role-auditor">കണക്ക് പരിശോധകൻ</span>
           </div>
         </div>
         <div class="leader-card youth-card">
           <div class="leader-avatar youth-avatar">JG</div>
           <div class="leader-info">
             <h4>Jeremiah Godly</h4>
-            <span class="leader-role">കണക്ക് പരിശോധകൻ</span>
+            <span class="leader-role" data-key="role-auditor">കണക്ക് പരിശോധകൻ</span>
           </div>
         </div>
         <div class="leader-card youth-card">
           <div class="leader-avatar youth-avatar">TK</div>
           <div class="leader-info">
             <h4>Thejus Kattady</h4>
-            <span class="leader-role">ഭദ്രാസന പ്രതിനിധി</span>
+            <span class="leader-role" data-key="role-dio">ഭദ്രാസന പ്രതിനിധി</span>
           </div>
         </div>
         <div class="leader-card youth-card">
           <div class="leader-avatar youth-avatar">JV</div>
           <div class="leader-info">
             <h4>Jonah Godly Varghese</h4>
-            <span class="leader-role">ഭദ്രാസന പ്രതിനിധി</span>
+            <span class="leader-role" data-key="role-dio">ഭദ്രാസന പ്രതിനിധി</span>
           </div>
         </div>
         <div class="leader-card youth-card">
           <div class="leader-avatar youth-avatar">AL</div>
           <div class="leader-info">
             <h4>Alan Mathews</h4>
-            <span class="leader-role">കൈസ്ഥാന സമിതി പ്രതിനിധി</span>
+            <span class="leader-role" data-key="role-assembly">കൈസ്ഥാന സമിതി പ്രതിനിധി</span>
           </div>
         </div>
       </div>
@@ -272,36 +276,36 @@
     <div class="leader-group leader-group-sevika">
       <h3 class="leader-group-title">
         <span class="group-icon">♡</span>
-        സേവികാ സംഘം
+        <span data-key="group-sevika">സേവികാ സംഘം</span>
         <span class="group-icon">♡</span>
       </h3>
       <div class="leaders-grid">
         <div class="leader-card sevika-card">
           <div class="leader-avatar sevika-avatar">GT</div>
           <div class="leader-info">
-            <h4>ഗീത തര്യൻ</h4>
-            <span class="leader-role">സെക്രട്ടറി</span>
+            <h4 data-key="leader-geetha">ഗീത തര്യൻ</h4>
+            <span class="leader-role" data-key="role-secretary">സെക്രട്ടറി</span>
           </div>
         </div>
         <div class="leader-card sevika-card">
           <div class="leader-avatar sevika-avatar">SS</div>
           <div class="leader-info">
-            <h4>ശോശാമ്മ സാബു</h4>
-            <span class="leader-role">അംഗം</span>
+            <h4 data-key="leader-sosamma">ശോശാമ്മ സാബു</h4>
+            <span class="leader-role" data-key="role-member">അംഗം</span>
           </div>
         </div>
         <div class="leader-card sevika-card">
           <div class="leader-avatar sevika-avatar">BV</div>
           <div class="leader-info">
             <h4>Bincy Teacher</h4>
-            <span class="leader-role">അംഗം</span>
+            <span class="leader-role" data-key="role-member">അംഗം</span>
           </div>
         </div>
         <div class="leader-card sevika-card">
           <div class="leader-avatar sevika-avatar">MV</div>
           <div class="leader-info">
             <h4>Molly Vijayan</h4>
-            <span class="leader-role">അംഗം</span>
+            <span class="leader-role" data-key="role-member">അംഗം</span>
           </div>
         </div>
       </div>
@@ -311,29 +315,29 @@
   <!-- ===== GALLERY ===== -->
   <section id="gallery" class="gallery-section">
     <div class="gallery-header">
-      <span class="section-label">ദൃശ്യങ്ങൾ</span>
-      <h2 class="section-title">ഞങ്ങളുടെ ഇടവക</h2>
+      <span class="section-label" data-key="gallery-label">ദൃശ്യങ്ങൾ</span>
+      <h2 class="section-title" data-key="gallery-title">ഞങ്ങളുടെ ഇടവക</h2>
     </div>
     <div class="gallery-grid">
       <div class="gallery-item gallery-item-large">
         <img src="CHURCH GATE VIEW.png" alt="Church Gate View" loading="lazy" />
-        <div class="gallery-caption">ഗേറ്റ് ദൃശ്യം</div>
+        <div class="gallery-caption" data-key="cap-gate">ഗേറ്റ് ദൃശ്യം</div>
       </div>
       <div class="gallery-item">
         <img src="chrch front view closup.jpg" alt="Church Front Closeup" loading="lazy" />
-        <div class="gallery-caption">ദേവാലയ മുൻഭാഗം</div>
+        <div class="gallery-caption" data-key="cap-front">ദേവാലയ മുൻഭാഗം</div>
       </div>
       <div class="gallery-item">
         <img src="church image.avif" alt="Church" loading="lazy" />
-        <div class="gallery-caption">ചർച്ച്</div>
+        <div class="gallery-caption" data-key="cap-church">ചർച്ച്</div>
       </div>
       <div class="gallery-item">
         <img src="church image long dist left view.jpg" alt="Long Distance View" loading="lazy" />
-        <div class="gallery-caption">ദൂര ദൃശ്യം</div>
+        <div class="gallery-caption" data-key="cap-dist">ദൂര ദൃശ്യം</div>
       </div>
       <div class="gallery-item gallery-item-night">
         <img src="church long shot night.jpg" alt="Night View" loading="lazy" />
-        <div class="gallery-caption">രാത്രി ദൃശ്യം</div>
+        <div class="gallery-caption" data-key="cap-night">രാത്രി ദൃശ്യം</div>
       </div>
     </div>
   </section>
@@ -342,10 +346,10 @@
   <section class="verse-section verse-section-alt">
     <div class="verse-inner">
       <div class="verse-cross">✝</div>
-      <blockquote class="verse-text">
+      <blockquote class="verse-text" data-key="verse-3-text">
         "ഇവ എല്ലാറ്റിന്റെയും മുകളിൽ സ്നേഹം ധരിക്കുവിൻ; അത് ഐക്യത്തിന്റെ തികഞ്ഞ ബന്ധമാകുന്നു."
       </blockquote>
-      <cite class="verse-ref">— കൊലൊസ്സ്യർ 3:14</cite>
+      <cite class="verse-ref" data-key="verse-3-ref">— കൊലൊസ്സ്യർ 3:14</cite>
     </div>
   </section>
 
@@ -356,23 +360,23 @@
       <div class="contact-overlay"></div>
     </div>
     <div class="contact-content">
-      <span class="section-label section-label-light">ബന്ധപ്പെടുക</span>
-      <h2 class="section-title section-title-light">ഞങ്ങളിലേക്ക്<br/>എത്തിച്ചേരൂ</h2>
+      <span class="section-label section-label-light" data-key="contact-label">ബന്ധപ്പെടുക</span>
+      <h2 class="section-title section-title-light" data-key="contact-title">ഞങ്ങളിലേക്ക്<br/>എത്തിച്ചേരൂ</h2>
       <div class="contact-cards">
         <div class="contact-card">
           <div class="contact-icon">⛪</div>
-          <h4>ദേവാലയം</h4>
-          <p>കീഴില്ലം നസ്രേത്ത്<br/>മാർത്തോമ്മ ചർച്ച്<br/>കീഴില്ലം, കേരളം</p>
+          <h4 data-key="card-church-title">ദേവാലയം</h4>
+          <p data-key="card-church-body">കീഴില്ലം നസ്രേത്ത്<br/>മാർത്തോമ്മ ചർച്ച്<br/>കീഴില്ലം, കേരളം</p>
         </div>
         <div class="contact-card">
           <div class="contact-icon">⏰</div>
-          <h4>ആരാധനാ സമയം</h4>
-          <p>ഞായറാഴ്ച<br/>രാവിലെ 8:30<br/>വിശുദ്ധ കുർബാന</p>
+          <h4 data-key="card-worship-title">ആരാധനാ സമയം</h4>
+          <p data-key="card-worship-body">ഞായറാഴ്ച<br/>രാവിലെ 8:30<br/>വിശുദ്ധ കുർബാന</p>
         </div>
         <div class="contact-card">
           <div class="contact-icon">✝</div>
-          <h4>വികാരി</h4>
-          <p>റവ. അലക്സാണ്ടർ<br/>ജോർജ് അച്ചൻ<br/>കീഴില്ലം നസ്രേത്ത്</p>
+          <h4 data-key="card-vicar-title">വികാരി</h4>
+          <p data-key="card-vicar-body">റവ. അലക്സാണ്ടർ<br/>ജോർജ് അച്ചൻ<br/>കീഴില്ലം നസ്രേത്ത്</p>
         </div>
       </div>
     </div>
@@ -384,14 +388,14 @@
       <div class="footer-logo-wrap">
         <img src="Logo.png" alt="Church Logo" class="footer-logo" />
         <div>
-          <p class="footer-church-name">കീഴില്ലം നസ്രേത്ത് മാർത്തോമ്മ ചർച്ച്</p>
-          <p class="footer-denomination">മലങ്കര മാർത്തോമ്മ സുറിയാനി സഭ</p>
+          <p class="footer-church-name" data-key="footer-church-name">കീഴില്ലം നസ്രേത്ത് മാർത്തോമ്മ ചർച്ച്</p>
+          <p class="footer-denomination" data-key="footer-denomination">മലങ്കര മാർത്തോമ്മ സുറിയാനി സഭ</p>
         </div>
       </div>
       <div class="footer-verse">
-        <p>"ദൈവം സ്നേഹം ആകുന്നു" — 1 യോഹ. 4:8</p>
+        <p data-key="footer-verse">"ദൈവം സ്നേഹം ആകുന്നു" — 1 യോഹ. 4:8</p>
       </div>
-      <p class="footer-copy">© 2026 കീഴില്ലം നസ്രേത്ത് മാർത്തോമ്മ ചർച്ച്. എല്ലാ അവകാശങ്ങളും നിക്ഷിപ്തം.</p>
+      <p class="footer-copy" data-key="footer-copy">© 2026 കീഴില്ലം നസ്രേത്ത് മാർത്തോമ്മ ചർച്ച്. എല്ലാ അവകാശങ്ങളും നിക്ഷിപ്തം.</p>
     </div>
   </footer>
 
