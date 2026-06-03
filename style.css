@@ -111,6 +111,10 @@ img { display: block; max-width: 100%; }
   backdrop-filter: blur(12px);
 }
 
+body.dark-theme #navbar.scrolled {
+  background: rgba(29, 19, 10, 0.97);
+}
+
 .nav-inner {
   max-width: 1200px;
   margin: 0 auto;
@@ -671,6 +675,12 @@ img { display: block; max-width: 100%; }
   transition: transform var(--transition), box-shadow var(--transition);
 }
 
+body.dark-theme .vicar-card {
+  background: linear-gradient(135deg, #1f1610, #2c2018);
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
 .vicar-card::before {
   content: '';
   position: absolute;
@@ -1054,6 +1064,11 @@ img { display: block; max-width: 100%; }
   color: rgba(255,255,255,0.8);
   padding: 56px 32px 36px;
   text-align: center;
+}
+
+body.dark-theme .footer {
+  background: #120b06;
+  border-top: 1px solid var(--border);
 }
 
 .footer-inner {
