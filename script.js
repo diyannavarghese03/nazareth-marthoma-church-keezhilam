@@ -53,6 +53,7 @@ addRevealClass('.vicar-card');
 addRevealClass('.leader-card');
 addRevealClass('.gallery-item');
 addRevealClass('.contact-card');
+addRevealClass('.contact-map-wrap');
 addRevealClass('.leaders-header');
 addRevealClass('.gallery-header');
 addRevealClass('.leader-group-title');
