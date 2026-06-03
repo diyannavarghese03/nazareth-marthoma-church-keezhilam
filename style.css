@@ -806,6 +806,58 @@ img { display: block; max-width: 100%; }
   display: block;
 }
 
+.leader-subgroup-title {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gold-dark);
+  margin: 32px 0 16px;
+  border-left: 3px solid var(--gold);
+  padding-left: 10px;
+}
+
+.leader-phone {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--gold-dark);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+  opacity: 0.85;
+  transition: opacity var(--transition);
+}
+
+.leader-phone:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.vicar-phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 15px;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--gold-light);
+  text-decoration: none;
+  border: 1px solid rgba(200, 169, 110, 0.4);
+  padding: 6px 16px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  transition: all var(--transition);
+}
+
+.vicar-phone:hover {
+  background: rgba(200, 169, 110, 0.2);
+  border-color: var(--gold-light);
+  transform: translateY(-1px);
+}
+
 .leader-group-youth .leader-group-title { color: #1a4a7a; }
 .leader-group-youth .leader-group-title .group-icon { color: #6baed6; }
 
