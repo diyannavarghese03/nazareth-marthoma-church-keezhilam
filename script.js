@@ -57,6 +57,9 @@ addRevealClass('.contact-map-wrap');
 addRevealClass('.leaders-header');
 addRevealClass('.gallery-header');
 addRevealClass('.leader-group-title');
+addRevealClass('.timings-image-col');
+addRevealClass('.timings-text-col');
+
 
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {

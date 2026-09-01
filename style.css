@@ -376,6 +376,240 @@ body.dark-theme #navbar.scrolled {
   box-shadow: 0 14px 40px rgba(160,120,64,0.55);
 }
 
+.hero-btn-yt {
+  background: rgba(255,255,255,0.12);
+  border: 2px solid rgba(255,255,255,0.5);
+  color: white;
+  box-shadow: none;
+  margin-top: 0;
+}
+
+.hero-btn-yt:hover {
+  background: #ff0000;
+  border-color: #ff0000;
+  color: white;
+  box-shadow: 0 8px 32px rgba(255,0,0,0.4);
+}
+
+/* =====================================================
+   TIMINGS & SONG BOARD SECTION
+   ===================================================== */
+.timings-section {
+  background: var(--cream);
+  padding: 70px 32px 60px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Centred single-column layout */
+.timings-centered-inner {
+  max-width: 560px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.songboard-week-label {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  border-bottom: 2px solid var(--gold);
+  padding-bottom: 4px;
+}
+
+/* Old grid layout (kept for reference, unused now) */
+.timings-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.timings-image-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.songboard-wrap {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  /* Give the transparent PNG a clean background matching the page */
+  background: var(--cream);
+  border-radius: 24px;
+  padding: 16px;
+  box-shadow: 0 16px 48px var(--shadow);
+}
+
+/* Larger centred version */
+.songboard-large {
+  width: 100%;
+  max-width: 480px;
+}
+
+body.dark-theme .songboard-wrap {
+  background: #1d130a;
+}
+
+.songboard-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* Overlay container sits exactly on top of the image */
+.songboard-overlays {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Numbers sit in the right half of each dark slot,
+   shifted left compared to before (justify-content: center, not flex-end) */
+.sb-row {
+  position: absolute;
+  left: 42%;       /* start from the centre of the board */
+  width: 40%;      /* span the right portion of the slot */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-50%);
+}
+
+.sb-number {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.1rem, 3vw, 2rem);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.06em;
+  text-shadow:
+    0 1px 4px rgba(0,0,0,0.9),
+    0 0 14px rgba(0,0,0,0.6);
+  line-height: 1;
+}
+
+/* Caption below the board */
+.songboard-caption {
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--text-soft);
+  margin-top: 14px;
+  letter-spacing: 0.06em;
+}
+
+
+
+.timings-text-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.timings-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 8px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--warm-white);
+}
+
+.timing-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border);
+  transition: background var(--transition);
+}
+
+.timing-row:last-child {
+  border-bottom: none;
+}
+
+.timing-row:hover {
+  background: rgba(200,169,110,0.07);
+}
+
+.timing-icon {
+  font-size: 1.4rem;
+  color: var(--gold);
+  min-width: 36px;
+  text-align: center;
+  line-height: 1;
+}
+
+.timing-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.timing-label {
+  font-family: var(--font-mal);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--charcoal);
+}
+
+.timing-note {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--text-soft);
+  letter-spacing: 0.02em;
+}
+
+.yt-channel-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 28px;
+  padding: 14px 28px;
+  background: #ff0000;
+  color: white;
+  border-radius: 50px;
+  text-decoration: none;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  box-shadow: 0 8px 28px rgba(255,0,0,0.3);
+  transition: all var(--transition);
+  align-self: flex-start;
+}
+
+.yt-channel-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 36px rgba(255,0,0,0.45);
+}
+
+.yt-icon {
+  font-size: 1.1rem;
+}
+
+/* hero buttons wrap */
+.hero-content .hero-btn + .hero-btn {
+  margin-left: 14px;
+}
+
+
+
 .hero-scroll-hint {
   position: absolute;
   bottom: 36px;
@@ -1178,6 +1412,19 @@ body.dark-theme .footer {
     flex-direction: column;
     align-items: center;
   }
+
+  .timings-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .timings-image-col {
+    order: 2;
+  }
+
+  .timings-text-col {
+    order: 1;
+  }
 }
 
 @media (max-width: 720px) {
@@ -1204,6 +1451,11 @@ body.dark-theme .footer {
 
   .hero-title { font-size: 2.4rem; }
 
+  .hero-content .hero-btn + .hero-btn {
+    margin-left: 10px;
+    margin-top: 0;
+  }
+
   .leaders-grid {
     grid-template-columns: 1fr;
   }
@@ -1217,6 +1469,14 @@ body.dark-theme .footer {
     flex-direction: column;
     text-align: center;
   }
+
+  .timings-section {
+    padding: 60px 20px;
+  }
+
+  .timing-row {
+    padding: 14px 18px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1225,4 +1485,7 @@ body.dark-theme .footer {
   .leaders-section { padding: 60px 20px; }
   .gallery-section { padding: 60px 20px; }
   .about-stats { flex-wrap: wrap; }
+  .hero-btn-yt { margin-left: 0; margin-top: 12px; }
+  .yt-channel-btn { font-size: 0.85rem; padding: 12px 20px; }
 }
+
