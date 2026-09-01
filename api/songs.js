@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
 
   try {
     // Parse the service account JSON stored as an environment variable
-    const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
+    const credentials = JSON.parse(process.env.song_number);
 
     const auth = new google.auth.GoogleAuth({
       credentials,
