@@ -3,6 +3,31 @@
 //  Main JavaScript
 // ============================================================
 
+/* ===== SONG BOARD — fetch numbers from Google Sheet via API ===== */
+async function fetchSongNumbers() {
+  try {
+    const res = await fetch('/api/songs');
+    if (!res.ok) return;                // silently skip if API not available
+    const data = await res.json();
+
+    // Map each slot key to the corresponding .sb-row span
+    const rows = document.querySelectorAll('.sb-row');
+    const keys = ['row1', 'row2', 'row3', 'row4', 'row5'];
+
+    keys.forEach((key, i) => {
+      if (rows[i] && data[key] !== undefined) {
+        const span = rows[i].querySelector('.sb-number');
+        if (span) span.textContent = data[key];
+      }
+    });
+  } catch (e) {
+    // Network error — board keeps its default HTML numbers
+  }
+}
+
+fetchSongNumbers();
+
+
 /* ===== NAVBAR SCROLL BEHAVIOUR ===== */
 const navbar = document.getElementById('navbar');
 function handleNavScroll() {
