@@ -3,29 +3,148 @@
 //  Main JavaScript
 // ============================================================
 
-/* ===== SONG BOARD — fetch numbers from Google Sheet via API ===== */
-async function fetchSongNumbers() {
+/* ===== CHURCH DATA — fetch everything from Google Sheet ===== */
+async function fetchChurchData() {
   try {
-    const res = await fetch('/api/songs');
-    if (!res.ok) return;                // silently skip if API not available
-    const data = await res.json();
+    const res = await fetch('/api/church-data');
+    if (!res.ok) return;
+    const { sunday, leaders, youth } = await res.json();
 
-    // Map each slot key to the corresponding .sb-row span
-    const rows = document.querySelectorAll('.sb-row');
-    const keys = ['row1', 'row2', 'row3', 'row4', 'row5'];
-
-    keys.forEach((key, i) => {
-      if (rows[i] && data[key] !== undefined) {
-        const span = rows[i].querySelector('.sb-number');
-        if (span) span.textContent = data[key];
+    // ── 1. Song board numbers ────────────────────────────────────────
+    const sbRows = document.querySelectorAll('.sb-row');
+    ['row1', 'row2', 'row3', 'row4', 'row5'].forEach((key, i) => {
+      if (sbRows[i] && sunday[key]) {
+        const span = sbRows[i].querySelector('.sb-number');
+        if (span) span.textContent = sunday[key];
       }
     });
+
+    // ── 2. Worship time in hero section ─────────────────────────────
+    const timeEl = document.querySelector('[data-key="hero-worship"]');
+    if (timeEl && sunday.service_time) {
+      timeEl.textContent = `ഞായറാഴ്ച വി. കുർബാന — ${sunday.service_time}`;
+    }
+
+    // ── 3. Service type badge ────────────────────────────────────────
+    const badge = document.getElementById('service-type-badge');
+    if (badge && sunday.service_type) {
+      if (sunday.service_type === 'holy_communion') {
+        badge.textContent = '✝ ഈ ആഴ്ച: വി. കുർബാന (Holy Communion)';
+        badge.className = 'service-badge service-badge-hc';
+      } else {
+        badge.textContent = '🙏 ഈ ആഴ്ച: പ്രാർഥനാ ആരാധന (Parsya Arathana)';
+        badge.className = 'service-badge service-badge-parsya';
+      }
+      badge.style.display = 'inline-flex';
+    }
+
+    // ── 4. Leaders grid (committee) ──────────────────────────────────
+    if (leaders && leaders.length > 0) {
+      renderLeaders(leaders);
+    }
+
+    // ── 5. Youth grid ────────────────────────────────────────────────
+    if (youth && youth.length > 0) {
+      renderYouth(youth);
+    }
+
   } catch (e) {
-    // Network error — board keeps its default HTML numbers
+    // Network error — static HTML values remain
   }
 }
 
-fetchSongNumbers();
+/* Build initials from a name string */
+function initials(name) {
+  return name.trim().split(/\s+/).map(w => w[0]).join('').toUpperCase().slice(0, 2);
+}
+
+/* Render a single leader card */
+function leaderCard(person, cardClass = 'leader-card', avatarClass = 'leader-avatar') {
+  const phone = person.phone
+    ? `<a href="tel:${person.phone.replace(/\s/g, '')}" class="leader-phone">📞 ${person.phone}</a>`
+    : '';
+  return `
+    <div class="${cardClass}">
+      <div class="${avatarClass}">${initials(person.name)}</div>
+      <div class="leader-info">
+        <h4>${person.name}</h4>
+        <span class="leader-role">${person.role}</span>
+        ${phone}
+      </div>
+    </div>`;
+}
+
+/* Group an array of people by their "group" field */
+function groupBy(arr, key) {
+  return arr.reduce((acc, item) => {
+    const g = item[key] || 'other';
+    if (!acc[g]) acc[g] = [];
+    acc[g].push(item);
+    return acc;
+  }, {});
+}
+
+/* Render committee leaders */
+function renderLeaders(leaders) {
+  const container = document.getElementById('leaders-dynamic');
+  if (!container) return;
+
+  // Group labels in display order
+  const groupOrder = [
+    { key: 'vicar',     label: null },          // vicar handled separately
+    { key: 'office',    label: 'Office Bearers / ഭാരവാഹികൾ' },
+    { key: 'rep',       label: 'Representatives / പ്രതിനിധികൾ' },
+    { key: 'org',       label: 'Organization Representatives / സംഘടന പ്രതിനിധികൾ' },
+    { key: 'auditor',   label: 'Auditors / കണക്ക് പരിശോധകർ' },
+  ];
+
+  const grouped = groupBy(leaders, 'group');
+
+  // Vicar card first
+  if (grouped.vicar) {
+    const v = grouped.vicar[0];
+    const phone = v.phone
+      ? `<a href="tel:${v.phone}" class="vicar-phone">📞 ${v.phone}</a>` : '';
+    document.getElementById('vicar-name-dynamic') &&
+      (document.getElementById('vicar-name-dynamic').textContent = v.name);
+    document.getElementById('vicar-role-dynamic') &&
+      (document.getElementById('vicar-role-dynamic').textContent = v.role);
+    document.getElementById('vicar-phone-dynamic') &&
+      (document.getElementById('vicar-phone-dynamic').outerHTML = phone || '');
+  }
+
+  // Committee groups
+  let html = '';
+  groupOrder.slice(1).forEach(({ key, label }) => {
+    const people = grouped[key];
+    if (!people || people.length === 0) return;
+    html += `<h4 class="leader-subgroup-title">${label}</h4>`;
+    html += `<div class="leaders-grid">`;
+    people.forEach(p => {
+      const avatarCls = p.group === 'org' && p.role.includes('സേവിക')
+        ? 'leader-avatar sevika-avatar'
+        : 'leader-avatar';
+      html += leaderCard(p, 'leader-card', avatarCls);
+    });
+    html += `</div>`;
+  });
+
+  container.innerHTML = html;
+}
+
+/* Render youth leaders */
+function renderYouth(youth) {
+  const container = document.getElementById('youth-dynamic');
+  if (!container) return;
+  let html = '<div class="leaders-grid">';
+  youth.forEach(p => {
+    html += leaderCard(p, 'leader-card youth-card', 'leader-avatar youth-avatar');
+  });
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+fetchChurchData();
 
 
 /* ===== NAVBAR SCROLL BEHAVIOUR ===== */

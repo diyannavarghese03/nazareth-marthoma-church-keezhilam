@@ -422,6 +422,44 @@ body.dark-theme #navbar.scrolled {
   padding-bottom: 4px;
 }
 
+/* Service type badge */
+.service-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.service-badge-hc {
+  background: rgba(160,120,64,0.12);
+  color: var(--gold-dark);
+  border: 1.5px solid var(--gold);
+}
+
+.service-badge-parsya {
+  background: rgba(80,120,180,0.1);
+  color: #3a6fa8;
+  border: 1.5px solid #7aaad4;
+}
+
+body.dark-theme .service-badge-hc {
+  background: rgba(200,169,110,0.15);
+  color: var(--gold);
+}
+
+body.dark-theme .service-badge-parsya {
+  background: rgba(100,160,220,0.12);
+  color: #8ec4f0;
+  border-color: #5a9dcc;
+}
+
+
+
 /* Old grid layout (kept for reference, unused now) */
 .timings-inner {
   max-width: 1200px;
