@@ -8,7 +8,7 @@ async function fetchChurchData() {
   try {
     const res = await fetch('/api/church-data');
     if (!res.ok) return;
-    const { sunday, leaders, youth } = await res.json();
+    const { sunday, leaders, youth, sevika } = await res.json();
 
     // ── 1. Song board numbers ────────────────────────────────────────
     const sbRows = document.querySelectorAll('.sb-row');
@@ -46,6 +46,11 @@ async function fetchChurchData() {
     // ── 5. Youth grid ────────────────────────────────────────────────
     if (youth && youth.length > 0) {
       renderYouth(youth);
+    }
+
+    // ── 6. Sevika grid ───────────────────────────────────────────────
+    if (sevika && sevika.length > 0) {
+      renderSevika(sevika);
     }
 
   } catch (e) {
@@ -143,6 +148,19 @@ function renderYouth(youth) {
   html += '</div>';
   container.innerHTML = html;
 }
+
+/* Render Sevika Sangham */
+function renderSevika(sevika) {
+  const container = document.getElementById('sevika-dynamic');
+  if (!container) return;
+  let html = '<div class="leaders-grid">';
+  sevika.forEach(p => {
+    html += leaderCard(p, 'leader-card sevika-card', 'leader-avatar sevika-avatar');
+  });
+  html += '</div>';
+  container.innerHTML = html;
+}
+
 
 fetchChurchData();
 

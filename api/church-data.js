@@ -59,7 +59,21 @@ module.exports = async (req, res) => {
         group: group || '',
       }));
 
-    res.status(200).json({ sunday, leaders, youth });
+    // ── 4. Sevika sheet (columns: name, role, phone) ─────────────────
+    const sevikaResp = await sheets.spreadsheets.values.get({
+      spreadsheetId: sheetId,
+      range: 'Sevika!A2:C30',
+    });
+    const sevika = (sevikaResp.data.values || [])
+      .filter(r => r[0])
+      .map(([name, role, phone]) => ({
+        name: name || '',
+        role: role || '',
+        phone: phone || '',
+      }));
+
+    res.status(200).json({ sunday, leaders, youth, sevika });
+
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Failed to fetch church data' });
