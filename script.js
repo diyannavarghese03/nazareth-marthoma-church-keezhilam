@@ -4,58 +4,106 @@
 // ============================================================
 
 /* ===== CHURCH DATA — fetch everything from Google Sheet ===== */
+
+// Store fetched data globally so language toggle can re-render
+let _churchData = null;
+let _currentLang = 'ml';
+
+// Role translation map — Malayalam → English for dynamic cards
+const roleMap = {
+  'ഇടവക വികാരി': 'Parish Vicar',
+  'വൈസ് പ്രസിഡന്റ്': 'Vice President',
+  'സെക്രട്ടറി': 'Secretary',
+  'ജോയിൻ്റ് സെക്രട്ടറി': 'Joint Secretary',
+  'ട്രഷറർ': 'Treasurer',
+  'ട്രസ്റ്റി (മുതൽ ചുമതല)': 'Trustee (Assets)',
+  'ട്രസ്റ്റി (കണക്ക് ചുമതല)': 'Trustee (Accounts)',
+  'ആത്മായ ശുശ്രൂഷകൻ': 'Lay Ministrant',
+  'മണ്ഡലം പ്രതിനിധി': 'Mandalam Rep.',
+  'അസംബ്ലി പ്രതിനിധി': 'Assembly Rep.',
+  'ഇടവക മിഷൻ പ്രതിനിധി': 'Edavaka Mission Rep.',
+  'സേവികാ സംഘം പ്രതിനിധി': 'Sevika Sangham Rep.',
+  'യുവജനസഖ്യം പ്രതിനിധി': 'Yuvajanasakhyam Rep.',
+  'സൺഡേ സ്കൂൾ പ്രതിനിധി': 'Sunday School Rep.',
+  'വികസന സമിതി പ്രതിനിധി': 'Development Committee Rep.',
+  'സീനിയർ സിറ്റിസൺ പ്രതിനിധി': 'Senior Citizens Rep.',
+  'കൈസ്ഥാന സമിതി പ്രതിനിധി': 'Committee Rep.',
+  'ഭദ്രാസന പ്രതിനിധി': 'Diocesan Rep.',
+  'സെൻ്റർ പ്രതിനിധി': 'Centre Rep.',
+  'കണക്ക് പരിശോധകൻ': 'Auditor',
+  'അംഗം': 'Member',
+};
+
+function translateRole(role, lang) {
+  if (lang === 'en' && roleMap[role]) return roleMap[role];
+  return role;
+}
+
 async function fetchChurchData() {
   try {
     const res = await fetch('/api/church-data');
     if (!res.ok) return;
-    const { sunday, leaders, youth, sevika } = await res.json();
-
-    // ── 1. Song board numbers ────────────────────────────────────────
-    const sbRows = document.querySelectorAll('.sb-row');
-    ['row1', 'row2', 'row3', 'row4', 'row5'].forEach((key, i) => {
-      if (sbRows[i] && sunday[key]) {
-        const span = sbRows[i].querySelector('.sb-number');
-        if (span) span.textContent = sunday[key];
-      }
-    });
-
-    // ── 2. Worship time in hero section ─────────────────────────────
-    const timeEl = document.querySelector('[data-key="hero-worship"]');
-    if (timeEl && sunday.service_time) {
-      timeEl.textContent = `ഞായറാഴ്ച വി. കുർബാന — ${sunday.service_time}`;
-    }
-
-    // ── 3. Service type badge ────────────────────────────────────────
-    const badge = document.getElementById('service-type-badge');
-    if (badge && sunday.service_type) {
-      if (sunday.service_type === 'holy_communion') {
-        badge.textContent = '✝ ഈ ആഴ്ച: വി. കുർബാന (Holy Communion)';
-        badge.className = 'service-badge service-badge-hc';
-      } else {
-        badge.textContent = '🙏 ഈ ആഴ്ച: പ്രാർഥനാ ആരാധന (Parsya Arathana)';
-        badge.className = 'service-badge service-badge-parsya';
-      }
-      badge.style.display = 'inline-flex';
-    }
-
-    // ── 4. Leaders grid (committee) ──────────────────────────────────
-    if (leaders && leaders.length > 0) {
-      renderLeaders(leaders);
-    }
-
-    // ── 5. Youth grid ────────────────────────────────────────────────
-    if (youth && youth.length > 0) {
-      renderYouth(youth);
-    }
-
-    // ── 6. Sevika grid ───────────────────────────────────────────────
-    if (sevika && sevika.length > 0) {
-      renderSevika(sevika);
-    }
-
+    _churchData = await res.json();
+    applyChurchData(_currentLang);
   } catch (e) {
     // Network error — static HTML values remain
   }
+}
+
+function applyChurchData(lang) {
+  if (!_churchData) return;
+  const { sunday, leaders, youth, sevika } = _churchData;
+
+  // ── 1. Song board numbers ────────────────────────────────────────
+  const sbRows = document.querySelectorAll('.sb-row');
+  ['row1', 'row2', 'row3', 'row4', 'row5'].forEach((key, i) => {
+    if (sbRows[i] && sunday[key]) {
+      const span = sbRows[i].querySelector('.sb-number');
+      if (span) span.textContent = sunday[key];
+    }
+  });
+
+  // ── 2. Hero worship time — changes with service type ─────────────
+  const timeEl = document.querySelector('[data-key="hero-worship"]');
+  if (timeEl && sunday.service_time && sunday.service_type) {
+    const t = sunday.service_time;
+    const isHC = sunday.service_type === 'holy_communion';
+    if (lang === 'ml') {
+      timeEl.textContent = isHC
+        ? `ഞായറാഴ്ച വി. കുർബാന — ${t}`
+        : `ഞായറാഴ്ച പരിശ്യ ആരാധന — ${t}`;
+    } else {
+      timeEl.textContent = isHC
+        ? `Sunday Holy Communion — ${t}`
+        : `Sunday Parsya Arathana — ${t}`;
+    }
+  }
+
+  // ── 3. Service type badge ────────────────────────────────────────
+  const badge = document.getElementById('service-type-badge');
+  if (badge && sunday.service_type) {
+    const isHC = sunday.service_type === 'holy_communion';
+    if (lang === 'ml') {
+      badge.textContent = isHC
+        ? '✝ ഈ ആഴ്ച: വി. കുർബാന (Holy Communion)'
+        : '🙏 ഈ ആഴ്ച: പരിശ്യ ആരാധന (Parsya Arathana)';
+    } else {
+      badge.textContent = isHC
+        ? '✝ This Week: Holy Communion'
+        : '🙏 This Week: Parsya Arathana';
+    }
+    badge.className = `service-badge ${isHC ? 'service-badge-hc' : 'service-badge-parsya'}`;
+    badge.style.display = 'inline-flex';
+  }
+
+  // ── 4. Leaders grid ──────────────────────────────────────────────
+  if (leaders && leaders.length > 0) renderLeaders(leaders, lang);
+
+  // ── 5. Youth grid ────────────────────────────────────────────────
+  if (youth && youth.length > 0) renderYouth(youth, lang);
+
+  // ── 6. Sevika grid ───────────────────────────────────────────────
+  if (sevika && sevika.length > 0) renderSevika(sevika, lang);
 }
 
 /* Build initials from a name string */
@@ -64,7 +112,8 @@ function initials(name) {
 }
 
 /* Render a single leader card */
-function leaderCard(person, cardClass = 'leader-card', avatarClass = 'leader-avatar') {
+function leaderCard(person, lang, cardClass = 'leader-card', avatarClass = 'leader-avatar') {
+  const role = translateRole(person.role, lang);
   const phone = person.phone
     ? `<a href="tel:${person.phone.replace(/\s/g, '')}" class="leader-phone">📞 ${person.phone}</a>`
     : '';
@@ -73,7 +122,7 @@ function leaderCard(person, cardClass = 'leader-card', avatarClass = 'leader-ava
       <div class="${avatarClass}">${initials(person.name)}</div>
       <div class="leader-info">
         <h4>${person.name}</h4>
-        <span class="leader-role">${person.role}</span>
+        <span class="leader-role">${role}</span>
         ${phone}
       </div>
     </div>`;
@@ -90,46 +139,41 @@ function groupBy(arr, key) {
 }
 
 /* Render committee leaders */
-function renderLeaders(leaders) {
+function renderLeaders(leaders, lang) {
   const container = document.getElementById('leaders-dynamic');
   if (!container) return;
 
-  // Group labels in display order
   const groupOrder = [
-    { key: 'vicar',     label: null },          // vicar handled separately
-    { key: 'office',    label: 'Office Bearers / ഭാരവാഹികൾ' },
-    { key: 'rep',       label: 'Representatives / പ്രതിനിധികൾ' },
-    { key: 'org',       label: 'Organization Representatives / സംഘടന പ്രതിനിധികൾ' },
-    { key: 'auditor',   label: 'Auditors / കണക്ക് പരിശോധകർ' },
+    { key: 'office',  label: lang === 'ml' ? 'ഭാരവാഹികൾ' : 'Office Bearers' },
+    { key: 'rep',     label: lang === 'ml' ? 'പ്രതിനിധികൾ' : 'Representatives' },
+    { key: 'org',     label: lang === 'ml' ? 'സംഘടന പ്രതിനിധികൾ' : 'Organization Representatives' },
+    { key: 'auditor', label: lang === 'ml' ? 'കണക്ക് പരിശോധകർ' : 'Auditors' },
   ];
 
   const grouped = groupBy(leaders, 'group');
 
-  // Vicar card first
+  // Update vicar card if present
   if (grouped.vicar) {
     const v = grouped.vicar[0];
-    const phone = v.phone
-      ? `<a href="tel:${v.phone}" class="vicar-phone">📞 ${v.phone}</a>` : '';
-    document.getElementById('vicar-name-dynamic') &&
-      (document.getElementById('vicar-name-dynamic').textContent = v.name);
-    document.getElementById('vicar-role-dynamic') &&
-      (document.getElementById('vicar-role-dynamic').textContent = v.role);
-    document.getElementById('vicar-phone-dynamic') &&
-      (document.getElementById('vicar-phone-dynamic').outerHTML = phone || '');
+    const nameEl = document.getElementById('vicar-name-dynamic');
+    const roleEl = document.getElementById('vicar-role-dynamic');
+    const phoneEl = document.getElementById('vicar-phone-dynamic');
+    if (nameEl) nameEl.textContent = v.name;
+    if (roleEl) roleEl.textContent = translateRole(v.role, lang);
+    if (phoneEl && v.phone) {
+      phoneEl.href = `tel:${v.phone}`;
+      phoneEl.textContent = `📞 ${v.phone}`;
+    }
   }
 
-  // Committee groups
   let html = '';
-  groupOrder.slice(1).forEach(({ key, label }) => {
+  groupOrder.forEach(({ key, label }) => {
     const people = grouped[key];
     if (!people || people.length === 0) return;
     html += `<h4 class="leader-subgroup-title">${label}</h4>`;
     html += `<div class="leaders-grid">`;
     people.forEach(p => {
-      const avatarCls = p.group === 'org' && p.role.includes('സേവിക')
-        ? 'leader-avatar sevika-avatar'
-        : 'leader-avatar';
-      html += leaderCard(p, 'leader-card', avatarCls);
+      html += leaderCard(p, lang, 'leader-card', 'leader-avatar');
     });
     html += `</div>`;
   });
@@ -138,31 +182,32 @@ function renderLeaders(leaders) {
 }
 
 /* Render youth leaders */
-function renderYouth(youth) {
+function renderYouth(youth, lang) {
   const container = document.getElementById('youth-dynamic');
   if (!container) return;
   let html = '<div class="leaders-grid">';
   youth.forEach(p => {
-    html += leaderCard(p, 'leader-card youth-card', 'leader-avatar youth-avatar');
+    html += leaderCard(p, lang, 'leader-card youth-card', 'leader-avatar youth-avatar');
   });
   html += '</div>';
   container.innerHTML = html;
 }
 
 /* Render Sevika Sangham */
-function renderSevika(sevika) {
+function renderSevika(sevika, lang) {
   const container = document.getElementById('sevika-dynamic');
   if (!container) return;
   let html = '<div class="leaders-grid">';
   sevika.forEach(p => {
-    html += leaderCard(p, 'leader-card sevika-card', 'leader-avatar sevika-avatar');
+    html += leaderCard(p, lang, 'leader-card sevika-card', 'leader-avatar sevika-avatar');
   });
   html += '</div>';
   container.innerHTML = html;
 }
 
-
 fetchChurchData();
+
+
 
 
 /* ===== NAVBAR SCROLL BEHAVIOUR ===== */
@@ -519,19 +564,22 @@ const translations = {
 
 const langToggle = document.getElementById('lang-toggle');
 if (langToggle) {
-  let currentLang = 'ml'; // Default is Malayalam
   langToggle.addEventListener('click', () => {
-    currentLang = currentLang === 'ml' ? 'en' : 'ml';
-    langToggle.textContent = currentLang === 'ml' ? 'EN' : 'ML';
-    langToggle.title = currentLang === 'ml' ? 'Switch to English' : 'Switch to Malayalam';
-    
-    // Switch all translatable contents
+    _currentLang = _currentLang === 'ml' ? 'en' : 'ml';
+    langToggle.textContent = _currentLang === 'ml' ? 'EN' : 'ML';
+    langToggle.title = _currentLang === 'ml' ? 'Switch to English' : 'Switch to Malayalam';
+
+    // Switch all static translatable elements
     document.querySelectorAll('[data-key]').forEach(el => {
       const key = el.getAttribute('data-key');
-      if (translations[currentLang] && translations[currentLang][key]) {
-        el.innerHTML = translations[currentLang][key];
+      if (translations[_currentLang] && translations[_currentLang][key]) {
+        el.innerHTML = translations[_currentLang][key];
       }
     });
+
+    // Re-render dynamic Google Sheets content in new language
+    applyChurchData(_currentLang);
   });
 }
+
 
