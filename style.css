@@ -568,7 +568,7 @@ body.dark-theme .songboard-wrap {
 
 .sb-number {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(1.1rem, 3vw, 2rem);
+  font-size: clamp(1.4rem, 4.2vw, 2.5rem);
   font-weight: 700;
   color: #ffffff;
   letter-spacing: 0.06em;
@@ -577,6 +577,7 @@ body.dark-theme .songboard-wrap {
     0 0 14px rgba(0,0,0,0.6);
   line-height: 1;
 }
+
 
 /* Caption below the board */
 .songboard-caption {
