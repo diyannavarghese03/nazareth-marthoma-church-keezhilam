@@ -558,13 +558,14 @@ body.dark-theme .songboard-wrap {
    shifted left compared to before (justify-content: center, not flex-end) */
 .sb-row {
   position: absolute;
-  left: 42%;       /* start from the centre of the board */
-  width: 40%;      /* span the right portion of the slot */
+  left: 38%;
+  width: 36%;
   display: flex;
   align-items: center;
   justify-content: center;
   transform: translateY(-50%);
 }
+
 
 .sb-number {
   font-family: 'Playfair Display', serif;
