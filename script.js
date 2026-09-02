@@ -55,10 +55,10 @@ function applyChurchData(lang) {
   const { sunday, leaders, youth, sevika } = _churchData;
 
   // ── 1. Song board numbers ────────────────────────────────────────
-  const sbRows = document.querySelectorAll('.sb-row');
-  ['row1', 'row2', 'row3', 'row4', 'row5'].forEach((key, i) => {
+  const sbRows = document.querySelectorAll(".sb-row");
+  ["row1", "row2", "row3", "row4", "row5"].forEach((key, i) => {
     if (sbRows[i] && sunday[key]) {
-      const span = sbRows[i].querySelector('.sb-number');
+      const span = sbRows[i].querySelector(".sb-number");
       if (span) span.textContent = sunday[key];
     }
   });
@@ -67,33 +67,33 @@ function applyChurchData(lang) {
   const timeEl = document.querySelector('[data-key="hero-worship"]');
   if (timeEl && sunday.service_time && sunday.service_type) {
     const t = sunday.service_time;
-    const isHC = sunday.service_type === 'holy_communion';
-    if (lang === 'ml') {
+    const isHC = sunday.service_type === "holy_communion";
+    if (lang === "ml") {
       timeEl.textContent = isHC
         ? `ഞായറാഴ്ച വി. കുർബാന — ${t}`
-        : `ഞായറാഴ്ച പരിശ്യ ആരാധന — ${t}`;
+        : `ഞായറാഴ്ച പരസ്യ ആരാധന — ${t}`;
     } else {
       timeEl.textContent = isHC
         ? `Sunday Holy Communion — ${t}`
-        : `Sunday Parsya Arathana — ${t}`;
+        : `Sunday Parasya Aradhana — ${t}`;
     }
   }
 
   // ── 3. Service type badge ────────────────────────────────────────
-  const badge = document.getElementById('service-type-badge');
+  const badge = document.getElementById("service-type-badge");
   if (badge && sunday.service_type) {
-    const isHC = sunday.service_type === 'holy_communion';
-    if (lang === 'ml') {
+    const isHC = sunday.service_type === "holy_communion";
+    if (lang === "ml") {
       badge.textContent = isHC
-        ? '✝ ഈ ആഴ്ച: വി. കുർബാന (Holy Communion)'
-        : '🙏 ഈ ആഴ്ച: പരിശ്യ ആരാധന (Parsya Arathana)';
+        ? "✝ ഈ ആഴ്ച: വി. കുർബാന (Holy Communion)"
+        : "🙏 ഈ ആഴ്ച: പരസ്യ ആരാധന (Parasya Aradhana)";
     } else {
       badge.textContent = isHC
-        ? '✝ This Week: Holy Communion'
-        : '🙏 This Week: Parsya Arathana';
+        ? "✝ This Week: Holy Communion"
+        : "🙏 This Week: Parasya Aradhana";
     }
-    badge.className = `service-badge ${isHC ? 'service-badge-hc' : 'service-badge-parsya'}`;
-    badge.style.display = 'inline-flex';
+    badge.className = `service-badge ${isHC ? "service-badge-hc" : "service-badge-parsya"}`;
+    badge.style.display = "inline-flex";
   }
 
   // ── 4. Leaders grid ──────────────────────────────────────────────
@@ -566,8 +566,8 @@ const langToggle = document.getElementById('lang-toggle');
 if (langToggle) {
   langToggle.addEventListener('click', () => {
     _currentLang = _currentLang === 'ml' ? 'en' : 'ml';
-    langToggle.textContent = _currentLang === 'ml' ? 'EN' : 'ML';
-    langToggle.title = _currentLang === 'ml' ? 'Switch to English' : 'Switch to Malayalam';
+    langToggle.textContent = _currentLang === 'ml' ? 'English' : 'മലയാളം';
+    langToggle.title = _currentLang === 'ml' ? 'Switch to English' : 'മലയാളത്തിലേക്ക് മാറ്റുക';
 
     // Switch all static translatable elements
     document.querySelectorAll('[data-key]').forEach(el => {
